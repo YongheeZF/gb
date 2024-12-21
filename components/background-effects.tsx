@@ -28,15 +28,21 @@ export function BackgroundEffects() {
 
     // Comet class
     class Comet {
-      x: number = 0;
-      y: number = 0;
-      length: number = 0;
-      speed: number = 0;
-      angle: number = 0;
-      opacity: number = 1;
+      x: number;
+      y: number;
+      length: number;
+      speed: number;
+      angle: number;
+      opacity: number;
 
       constructor() {
-        this.reset()
+        // Initialize all properties in constructor
+        this.x = Math.random() * getCanvasWidth()
+        this.y = 0
+        this.length = Math.random() * 80 + 20
+        this.speed = Math.random() * 2 + 1
+        this.angle = 70 + Math.random() * 20
+        this.opacity = 1
       }
 
       reset() {
@@ -153,4 +159,3 @@ export function BackgroundEffects() {
     />
   )
 }
-
