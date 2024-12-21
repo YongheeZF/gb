@@ -62,7 +62,7 @@ export default function Community() {
         },
         {
             title: "Twitter / X",
-            image: "/images/twitter",
+            image: "/images/x",
             imageType: "png",
             description: "ยังไม่ถึงเวลา...",
             link: "https://twitter.com",
