@@ -88,7 +88,7 @@ export default function Home() {
           <span className="text-red-500 text-shadow-red">Barry the Dread</span>
         </h1>
         <h2 className="text-4xl font-bold text-center text-white mb-12 text-shadow-white">
-          {currentPage ? currentPage.charAt(0).toUpperCase() + currentPage.slice(1) : "Barry's Marketplace"}
+          {currentPage ? currentPage.charAt(0).toUpperCase() + currentPage.slice(1) : "ยินดีต้อนรับท่านผู้มาเยือน"}
         </h2>
       </header>
 
@@ -124,7 +124,7 @@ export default function Home() {
             onClick={() => setCurrentPage(null)}
             className="px-6 py-3 bg-red-600 hover:bg-red-700 transition-colors shadow-lg"
           >
-            Back to Selection
+            กลับไปก่อนหน้า
           </Button>
         </div>
       )}
