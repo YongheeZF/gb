@@ -22,12 +22,12 @@ export function BackgroundEffects() {
 
     // Comet class
     class Comet {
-      x: number
-      y: number
-      length: number
-      speed: number
-      angle: number
-      opacity: number
+      x: number = 0;
+      y: number = 0;
+      length: number = 0;
+      speed: number = 0;
+      angle: number = 0;
+      opacity: number = 1;
 
       constructor() {
         this.reset()
