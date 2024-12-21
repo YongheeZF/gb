@@ -97,16 +97,6 @@ export default function Home() {
           {renderContent()}
         </div>
 
-        {currentPage && (
-          <div className="text-center mt-8 pb-8">
-            <button
-              className="px-6 py-3 bg-red-600 rounded-md hover:bg-red-700 transition-colors"
-              onClick={() => setCurrentPage(null)}
-            >
-              Back to Selection
-            </button>
-          </div>
-        )}
       </div>
 
       <div className="fixed bottom-4 right-4 z-50 flex items-center gap-4">
@@ -127,6 +117,17 @@ export default function Home() {
           {isMuted ? <VolumeX /> : <Volume2 />}
         </Button>
       </div>
+      {currentPage && (
+        <div className="fixed bottom-4 left-4 z-50">
+          <Button
+            variant="destructive"
+            onClick={() => setCurrentPage(null)}
+            className="px-6 py-3 bg-red-600 hover:bg-red-700 transition-colors shadow-lg"
+          >
+            Back to Selection
+          </Button>
+        </div>
+      )}
     </main>
   )
 }
