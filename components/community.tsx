@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
@@ -52,40 +51,40 @@ function CommunityItem({ title, image, imageType, description, link, borderColor
 }
 
 export default function Community() {
-  const communityItems = [
-    {
-      title: "Discord",
-      image: "/images/discord",
-      imageType: "png",
-      description: "เข้าชมกลุ่ม Discord ของ Barry the Dread",
-      link: "http://tiny.cc/AmethystCore",
-      borderColor: "#5865F2"  // Discord blue
-    },
-    {
-        title: "Twitter / X",
-        image: "/images/twitter",
-        imageType: "png",
-        description: "ยังไม่ถึงเวลา...",
-        link: "https://twitter.com",
-        borderColor: "#1DA1F2"  // Twitter blue
-      },
-    {
-      title: "Youtube",
-      image: "/images/you_tube",
-      imageType: "png",
-      description: "เข้าชม Youtube ช่องทางหลักของ Barry the Dread",
-      link: "https://www.youtube.com/@barryaroy",
-      borderColor: "#FF0000"  // Reddit orange
-    },
-    {
-        title: "Partner",
-        image: "/images/partner1",
-        imageType: "png",
-        description: "เข้าชม Youtube ช่องทางหลักของ Partner ท่านแรก",
-        link: "https://www.youtube.com/@MrMaxing/videos",
-        borderColor: "#FFA500"  // Reddit orange
-      }
-  ]
+    const communityItems = [
+        {
+          title: "Discord",
+          image: "/images/discord",
+          imageType: "png",
+          description: "เข้าชมกลุ่ม Discord ของ Barry the Dread",
+          link: "http://tiny.cc/AmethystCore",
+          borderColor: "#5865F2"  // Discord blue
+        },
+        {
+            title: "Twitter / X",
+            image: "/images/twitter",
+            imageType: "png",
+            description: "ยังไม่ถึงเวลา...",
+            link: "https://twitter.com",
+            borderColor: "#1DA1F2"  // Twitter blue
+          },
+        {
+          title: "Youtube",
+          image: "/images/you_tube",
+          imageType: "png",
+          description: "เข้าชม Youtube ช่องทางหลักของ Barry the Dread",
+          link: "https://www.youtube.com/@barryaroy",
+          borderColor: "#FF0000"  // Reddit orange
+        },
+        {
+            title: "Partner",
+            image: "/images/partner1",
+            imageType: "png",
+            description: "เข้าชม Youtube ช่องทางหลักของ Partner ท่านแรก",
+            link: "https://www.youtube.com/@MrMaxing/videos",
+            borderColor: "#FFA500"  // Reddit orange
+          }
+      ]
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">

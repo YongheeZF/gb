@@ -2,10 +2,8 @@ import { NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    // Get the file path from the URL
-    const url = new URL(request.url)
     const filePath = path.join(process.cwd(), 'public', 'packs', 'CG.mcpack')
 
     // Read the file

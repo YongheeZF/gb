@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
@@ -51,29 +50,29 @@ function MarketItem({ title, image, imageType, description, link }: MarketItemPr
 }
 
 export default function Markets() {
-  const marketItems = [
-    {
-      title: "กำลังลง.",
-      image: "/images/404",
-      imageType: "png",
-      description: "กำลังลง...",
-      link: "http://tiny.cc/AmethystCore"
-    },
-    {
-      title: "กำลังลง..",
-      image: "/images/404",
-      imageType: "png",
-      description: "กำลังลง...",
-      link: "http://tiny.cc/AmethystCore"
-    },
-    {
-      title: "กำลังลง...",
-      image: "/images/404",
-      imageType: "png",
-      description: "กำลังลง...",
-      link: "http://tiny.cc/AmethystCore"
-    }
-  ]
+    const marketItems = [
+        {
+          title: "กำลังลง.",
+          image: "/images/404",
+          imageType: "png",
+          description: "กำลังลง...",
+          link: "http://tiny.cc/AmethystCore"
+        },
+        {
+          title: "กำลังลง..",
+          image: "/images/404",
+          imageType: "png",
+          description: "กำลังลง...",
+          link: "http://tiny.cc/AmethystCore"
+        },
+        {
+          title: "กำลังลง...",
+          image: "/images/404",
+          imageType: "png",
+          description: "กำลังลง...",
+          link: "http://tiny.cc/AmethystCore"
+        }
+      ]
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
@@ -91,7 +90,7 @@ export default function Markets() {
           }
           50% {
             opacity: 0.8;
-            box-shadow: 0 0 20px rgb(255, 217, 0);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
           }
         }
         .animate-pulse-gold {
@@ -101,3 +100,4 @@ export default function Markets() {
     </div>
   )
 }
+
