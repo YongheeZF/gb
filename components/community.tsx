@@ -52,6 +52,14 @@ function CommunityItem({ title, image, imageType, description, link, borderColor
 
 export default function Community() {
     const communityItems = [
+      {
+        title: "Instagram",
+        image: "/images/ig",
+        imageType: "png",
+        description: "เข้าชมช่องทาง Instagram",
+        link: "https://www.instagram.com/frenzied_inferno.th/",
+        borderColor: "#9D00FF"  // Instagram purple
+      },
         {
           title: "Discord",
           image: "/images/discord",
@@ -74,7 +82,7 @@ export default function Community() {
           imageType: "png",
           description: "เข้าชม Youtube ช่องทางหลักของ Barry the Dread",
           link: "https://www.youtube.com/@barryaroy",
-          borderColor: "#FF0000"  // Reddit orange
+          borderColor: "#FF0000"  // YouTube Red
         },
         {
             title: "Partner",
@@ -82,7 +90,7 @@ export default function Community() {
             imageType: "png",
             description: "เข้าชม Youtube ช่องทางหลักของ Partner ท่านแรก",
             link: "https://www.youtube.com/@MrMaxing/videos",
-            borderColor: "#FFA500"  // Reddit orange
+            borderColor: "#FFA500"  // MrMaxing Orange
           }
       ]
 
