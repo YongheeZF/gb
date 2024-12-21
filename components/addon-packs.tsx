@@ -193,7 +193,7 @@ export default function AddonPacks() {
     {
       title: "Barry's Challenge",
       image: "/images/barry2",
-      imageType: "gif",
+      imageType: "png",
       downloads: downloadCounts["Barry's Challenge"] || 0,
       filePath: "/packs/V.mcpack"
     }
