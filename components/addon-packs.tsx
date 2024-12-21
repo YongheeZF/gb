@@ -8,15 +8,15 @@ interface AddonPackProps {
   title: string
   image: string
   imageType: string
-  globalDownloads: number
+  downloads: number
   filePath: string
   onDownload: (title: string) => void
 }
 
-function AddonPack({ title, image, imageType, globalDownloads, filePath, onDownload }: AddonPackProps) {
+function AddonPack({ title, image, imageType, downloads, filePath, onDownload }: AddonPackProps) {
   const [isDownloading, setIsDownloading] = useState(false)
   const [hasDownloaded, setHasDownloaded] = useState(false)
-  const [downloadCount, setDownloadCount] = useState(globalDownloads)
+  const [downloadCount, setDownloadCount] = useState(downloads)
   const [cooldown, setCooldown] = useState(false)
 
   // Load download state from localStorage
@@ -25,8 +25,8 @@ function AddonPack({ title, image, imageType, globalDownloads, filePath, onDownl
     if (downloadState === 'true') {
       setHasDownloaded(true)
     }
-    setDownloadCount(globalDownloads)
-  }, [title, globalDownloads])
+    setDownloadCount(downloads)
+  }, [title, downloads])
 
   const handleDownload = async () => {
     if (cooldown || isDownloading) return
@@ -68,7 +68,7 @@ function AddonPack({ title, image, imageType, globalDownloads, filePath, onDownl
 
   return (
     <div className="bg-zinc-900 border-2 border-red-500/20 rounded-lg p-6 relative overflow-hidden">
-      <div className="absolute inset-0 z-0" style={{ boxShadow: 'inset 0 0 20px rgba(239, 68, 68, 0.5), 0 0 20px rgba(239, 68, 68, 0.5)' }} />
+      <div className="absolute inset-0 z-0" style={{ boxShadow: 'inset 0 0 20px rgb(255, 0, 0), 0 0 20px rgb(255, 0, 0)' }} />
       <div className="relative z-10">
       <div className="aspect-video relative mb-4 bg-zinc-800 rounded-lg overflow-hidden">
         <Image 
@@ -81,7 +81,7 @@ function AddonPack({ title, image, imageType, globalDownloads, filePath, onDownl
       </div>
       <h3 className="text-2xl font-bold text-red-500 mb-2 text-shadow-red">{title}</h3>
       <div className="flex items-center justify-between">
-        <p className="text-gray-400">{globalDownloads} Total Downloads</p>
+        <p className="text-gray-400">{downloadCount} Downloads</p>
         <div className="relative">
           <div className={`absolute -inset-1 ${hasDownloaded ? 'bg-green-500/30' : 'bg-red-600/30'} rounded-lg blur-sm`} />
           
@@ -149,8 +149,6 @@ export default function AddonPacks() {
     return {}
   })
 
-  const [totalDownloads, setTotalDownloads] = useState(0);
-
   // Save download counts to localStorage whenever they change
   useEffect(() => {
     if (Object.keys(downloadCounts).length > 0) {
@@ -158,28 +156,11 @@ export default function AddonPacks() {
     }
   }, [downloadCounts])
 
-  useEffect(() => {
-    const savedTotalDownloads = localStorage.getItem('total_downloads');
-    if (savedTotalDownloads) {
-      setTotalDownloads(parseInt(savedTotalDownloads, 10));
-    }
-  }, []);
-
   const handleDownload = (title: string) => {
-    setDownloadCounts(prev => {
-      const newCounts = {
-        ...prev,
-        [title]: (prev[title] || 0) + 1
-      };
-      localStorage.setItem('download_counts', JSON.stringify(newCounts));
-      return newCounts;
-    });
-
-    setTotalDownloads(prevTotal => {
-      const newTotal = prevTotal + 1;
-      localStorage.setItem('total_downloads', newTotal.toString());
-      return newTotal;
-    });
+    setDownloadCounts(prev => ({
+      ...prev,
+      [title]: (prev[title] || 0) + 1
+    }))
   }
 
   const packs = [
@@ -201,14 +182,10 @@ export default function AddonPacks() {
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
-      <div className="text-center mb-8 text-2xl font-bold text-red-500">
-        Total Downloads: {totalDownloads}
-      </div>
       {packs.map((pack) => (
         <AddonPack 
           key={pack.title}
           {...pack}
-          globalDownloads={totalDownloads}
           onDownload={handleDownload}
         />
       ))}
