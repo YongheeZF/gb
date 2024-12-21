@@ -12,10 +12,16 @@ export function BackgroundEffects() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    // Getters for canvas width and height
+    const getCanvasWidth = () => canvas?.width ?? 0
+    const getCanvasHeight = () => canvas?.height ?? 0
+
     // Set canvas size
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      if (canvas) {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+      }
     }
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
@@ -34,7 +40,7 @@ export function BackgroundEffects() {
       }
 
       reset() {
-        this.x = Math.random() * canvas.width
+        this.x = Math.random() * getCanvasWidth()
         this.y = 0
         this.length = Math.random() * 80 + 20
         this.speed = Math.random() * 2 + 1
@@ -46,25 +52,25 @@ export function BackgroundEffects() {
         const angleRad = (this.angle * Math.PI) / 180
         this.x += Math.cos(angleRad) * this.speed
         this.y += Math.sin(angleRad) * this.speed
-        
-        if (this.y > canvas.height || this.x > canvas.width) {
+
+        if (this.y > getCanvasHeight() || this.x > getCanvasWidth()) {
           this.reset()
         }
       }
 
       draw() {
         if (!ctx) return
-        
+
         const gradient = ctx.createLinearGradient(
           this.x,
           this.y,
           this.x - Math.cos((this.angle * Math.PI) / 180) * this.length,
           this.y - Math.sin((this.angle * Math.PI) / 180) * this.length
         )
-        
+
         gradient.addColorStop(0, `rgba(255, 50, 50, ${this.opacity})`)
         gradient.addColorStop(1, 'rgba(255, 50, 50, 0)')
-        
+
         ctx.beginPath()
         ctx.strokeStyle = gradient
         ctx.lineWidth = 2
@@ -86,8 +92,8 @@ export function BackgroundEffects() {
       twinkleSpeed: number
 
       constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+        this.x = Math.random() * getCanvasWidth()
+        this.y = Math.random() * getCanvasHeight()
         this.size = Math.random() * 2 + 1
         this.opacity = Math.random()
         this.twinkleSpeed = Math.random() * 0.02
@@ -113,20 +119,22 @@ export function BackgroundEffects() {
 
     // Animation loop
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
-      // Update and draw stars
-      stars.forEach(star => {
-        star.update()
-        star.draw()
-      })
-      
-      // Update and draw comets
-      comets.forEach(comet => {
-        comet.update()
-        comet.draw()
-      })
-      
+      if (canvas && ctx) {
+        ctx.clearRect(0, 0, getCanvasWidth(), getCanvasHeight())
+
+        // Update and draw stars
+        stars.forEach(star => {
+          star.update()
+          star.draw()
+        })
+
+        // Update and draw comets
+        comets.forEach(comet => {
+          comet.update()
+          comet.draw()
+        })
+      }
+
       requestAnimationFrame(animate)
     }
 
