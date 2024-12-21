@@ -8,15 +8,15 @@ interface AddonPackProps {
   title: string
   image: string
   imageType: string
-  downloads: number
+  description: string
   filePath: string
   onDownload: (title: string) => void
 }
 
-function AddonPack({ title, image, imageType, downloads, filePath, onDownload }: AddonPackProps) {
+function AddonPack({ title, image, imageType, description, filePath, onDownload }: AddonPackProps) {
   const [isDownloading, setIsDownloading] = useState(false)
   const [hasDownloaded, setHasDownloaded] = useState(false)
-  const [downloadCount, setDownloadCount] = useState(downloads)
+  //const [downloadCount, setDownloadCount] = useState(downloads)
   const [cooldown, setCooldown] = useState(false)
 
   // Load download state from localStorage
@@ -25,8 +25,8 @@ function AddonPack({ title, image, imageType, downloads, filePath, onDownload }:
     if (downloadState === 'true') {
       setHasDownloaded(true)
     }
-    setDownloadCount(downloads)
-  }, [title, downloads])
+    //setDownloadCount(downloads)
+  }, [title])
 
   const handleDownload = async () => {
     if (cooldown || isDownloading) return
@@ -51,7 +51,6 @@ function AddonPack({ title, image, imageType, downloads, filePath, onDownload }:
 
       if (!hasDownloaded) {
         onDownload(title)
-        setDownloadCount(prev => prev + 1)
         setHasDownloaded(true)
         localStorage.setItem(`downloaded_${title}`, 'true')
       }
@@ -81,7 +80,7 @@ function AddonPack({ title, image, imageType, downloads, filePath, onDownload }:
       </div>
       <h3 className="text-2xl font-bold text-red-500 mb-2 text-shadow-red">{title}</h3>
       <div className="flex items-center justify-between">
-        <p className="text-gray-400">{downloadCount} Downloads</p>
+        <p className="text-gray-400">{description}</p>
         <div className="relative">
           <div className={`absolute -inset-1 ${hasDownloaded ? 'bg-green-500/30' : 'bg-red-600/30'} rounded-lg blur-sm`} />
           
@@ -164,21 +163,21 @@ export default function AddonPacks() {
   }
 
   const packs = [
-    {
-      title: "Barry's Revenge",
-      image: "/images/barry1",
-      imageType: "gif",
-      downloads: downloadCounts["Barry's Revenge"] || 0,
-      filePath: "/packs/CG.mcpack"
-    },
-    {
-      title: "Barry's Challenge",
-      image: "/images/barry2",
-      imageType: "png",
-      downloads: downloadCounts["Barry's Challenge"] || 0,
-      filePath: "/packs/V.mcpack"
-    }
-  ]
+  {
+    title: "Barry's Revenge",
+    image: "/images/barry1",
+    imageType: "gif",
+    description: "ทดสอบๆ 1",
+    filePath: "/packs/CG.mcpack"
+  },
+  {
+    title: "Barry's Challenge",
+    image: "/images/barry2",
+    imageType: "png",
+    description: "ทดสอบๆ 2",
+    filePath: "/packs/V.mcpack"
+  }
+]
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
