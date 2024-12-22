@@ -4,7 +4,12 @@ import { useEffect, useRef } from 'react'
 
 export function BackgroundEffects() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const blackHoleRef = useRef<any>(null)
+  type BlackHoleType = {
+    update: () => void;
+    draw: () => void;
+    setTarget: (x: number, y: number) => void;
+  }
+  const blackHoleRef = useRef<BlackHoleType | null>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
