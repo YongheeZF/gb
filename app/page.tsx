@@ -95,7 +95,7 @@ export default function Home() {
         </h2>
       </header>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 pb-20 relative z-10"> {/* Updated container div */}
         <div className="min-h-[50vh]">
           {renderContent()}
         </div>

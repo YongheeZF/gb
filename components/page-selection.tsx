@@ -18,7 +18,7 @@ export default function PageSelection({ onSelectPage }: PageSelectionProps) {
             {page === 'addons' ? 'เยี่ยมชมผลงานแอด-ออนต่างๆ' : 
              page === 'markets' ? 'ระบบที่ควรต้องพกไว้ประดับบารมี' : 
              page === 'communities' ? 'ช่องทางชุมชนทั้งหมด' :
-             'เรียนรู้เกี่ยวกับคอมมานด์บล็อก'}
+             'รับชมการสอนทำระบบคอมมานด์บล็อกต่างๆ'}
           </p>
         </button>
       ))}
