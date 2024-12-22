@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 
 export function BackgroundEffects() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const blackHoleRef = useRef<any>(null)
+  const blackHoleRef = useRef<BlackHole | null>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -76,8 +76,7 @@ export function BackgroundEffects() {
         this.opacity = Math.random() * 0.5 + 0.5
       }
 
-      draw() {
-        if (!ctx) return
+      draw(ctx: CanvasRenderingContext2D) {
         ctx.beginPath()
         ctx.fillStyle = `rgba(255, ${50 + Math.random() * 50}, 50, ${this.opacity})`
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
@@ -85,7 +84,7 @@ export function BackgroundEffects() {
       }
     }
 
-    // Star class remains the same
+    // Star class
     class Star {
       x: number
       y: number
@@ -106,8 +105,7 @@ export function BackgroundEffects() {
         this.opacity = Math.max(0, Math.min(1, this.opacity))
       }
 
-      draw() {
-        if (!ctx) return
+      draw(ctx: CanvasRenderingContext2D) {
         ctx.beginPath()
         ctx.fillStyle = `rgba(255, 100, 100, ${this.opacity})`
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
@@ -115,7 +113,7 @@ export function BackgroundEffects() {
       }
     }
 
-    // Comet class remains the same
+    // Comet class
     class Comet {
       x: number;
       y: number;
@@ -155,9 +153,7 @@ export function BackgroundEffects() {
         }
       }
 
-      draw() {
-        if (!ctx) return
-
+      draw(ctx: CanvasRenderingContext2D) {
         const gradient = ctx.createLinearGradient(
           this.x,
           this.y,
@@ -180,7 +176,7 @@ export function BackgroundEffects() {
       }
     }
 
-    // Updated BlackHole class
+    // Black Hole class
     class BlackHole {
       x: number
       y: number
@@ -194,47 +190,43 @@ export function BackgroundEffects() {
       flareAngle: number
       flareBranches: Array<{angle: number, length: number, width: number}>
       sparks: ParticleSpark[]
+      ctx: CanvasRenderingContext2D
 
-      constructor() {
-        this.x = (canvas?.width ?? window.innerWidth) / 2
-        this.y = (canvas?.height ?? window.innerHeight) / 2
+      constructor(ctx: CanvasRenderingContext2D) {
+        this.ctx = ctx
+        this.x = window.innerWidth / 2
+        this.y = window.innerHeight / 2
         this.targetX = this.x
         this.targetY = this.y
-        this.radius = 80 // Increased radius
+        this.radius = 80
         this.angle = 0
         this.rotationSpeed = 0.001
         this.lastFlareTime = Date.now()
         this.flareIntensity = 0
         this.flareAngle = 0
         this.flareBranches = []
-        // Initialize sparks
         this.sparks = Array(100).fill(null).map(() => new ParticleSpark(this.x, this.y))
       }
 
       update() {
-        // Update rotation
         this.angle += this.rotationSpeed
 
-        // Smooth movement towards target
         const dx = this.targetX - this.x
         const dy = this.targetY - this.y
         this.x += dx * 0.02
         this.y += dy * 0.02
 
-        // Check if it's time for a new flare
         const currentTime = Date.now()
-        if (currentTime - this.lastFlareTime > 30000) { // 30 seconds
+        if (currentTime - this.lastFlareTime > 30000) {
           this.triggerFlare()
           this.lastFlareTime = currentTime
         }
 
-        // Update flare intensity
         if (this.flareIntensity > 0) {
           this.flareIntensity -= 0.02
           this.flareAngle += 0.05
         }
 
-        // Update sparks
         this.sparks.forEach(spark => spark.update(this.x, this.y))
       }
 
@@ -243,7 +235,6 @@ export function BackgroundEffects() {
         this.flareAngle = Math.random() * Math.PI * 2
         this.flareBranches = []
         
-        // Create random branches for the flare
         const numBranches = Math.floor(Math.random() * 3) + 3
         for (let i = 0; i < numBranches; i++) {
           this.flareBranches.push({
@@ -255,10 +246,10 @@ export function BackgroundEffects() {
       }
 
       drawFlare() {
-        if (!ctx || this.flareIntensity <= 0) return
+        if (this.flareIntensity <= 0) return
 
         this.flareBranches.forEach(branch => {
-          const gradient = ctx.createLinearGradient(
+          const gradient = this.ctx.createLinearGradient(
             this.x,
             this.y,
             this.x + Math.cos(branch.angle) * branch.length,
@@ -269,13 +260,12 @@ export function BackgroundEffects() {
           gradient.addColorStop(0.3, `rgba(255, 150, 50, ${this.flareIntensity * 0.7})`)
           gradient.addColorStop(1, 'rgba(255, 50, 50, 0)')
 
-          ctx.beginPath()
-          ctx.strokeStyle = gradient
-          ctx.lineWidth = branch.width * this.flareIntensity
-          ctx.lineCap = 'round'
-          ctx.moveTo(this.x, this.y)
+          this.ctx.beginPath()
+          this.ctx.strokeStyle = gradient
+          this.ctx.lineWidth = branch.width * this.flareIntensity
+          this.ctx.lineCap = 'round'
+          this.ctx.moveTo(this.x, this.y)
           
-          // Create a curved path for the flare
           const cp1x = this.x + Math.cos(branch.angle - 0.2) * branch.length * 0.5
           const cp1y = this.y + Math.sin(branch.angle - 0.2) * branch.length * 0.5
           const cp2x = this.x + Math.cos(branch.angle + 0.2) * branch.length * 0.7
@@ -283,13 +273,12 @@ export function BackgroundEffects() {
           const endX = this.x + Math.cos(branch.angle) * branch.length
           const endY = this.y + Math.sin(branch.angle) * branch.length
           
-          ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, endX, endY)
-          ctx.stroke()
+          this.ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, endX, endY)
+          this.ctx.stroke()
 
-          // Add glow effect
-          ctx.lineWidth = branch.width * this.flareIntensity * 2
-          ctx.strokeStyle = `rgba(255, 100, 50, ${this.flareIntensity * 0.3})`
-          ctx.stroke()
+          this.ctx.lineWidth = branch.width * this.flareIntensity * 2
+          this.ctx.strokeStyle = `rgba(255, 100, 50, ${this.flareIntensity * 0.3})`
+          this.ctx.stroke()
         })
       }
 
@@ -299,16 +288,10 @@ export function BackgroundEffects() {
       }
 
       draw() {
-        if (!ctx) return
-
-        // Draw sparks first
-        this.sparks.forEach(spark => spark.draw())
-
-        // Draw flare effect
+        this.sparks.forEach(spark => spark.draw(this.ctx))
         this.drawFlare()
 
-        // Draw core with enhanced glow
-        const coreGradient = ctx.createRadialGradient(
+        const coreGradient = this.ctx.createRadialGradient(
           this.x,
           this.y,
           0,
@@ -320,14 +303,13 @@ export function BackgroundEffects() {
         coreGradient.addColorStop(0.4, 'rgba(255, 0, 0, 0.5)')
         coreGradient.addColorStop(1, 'rgba(0, 0, 0, 0)')
 
-        ctx.beginPath()
-        ctx.fillStyle = coreGradient
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
-        ctx.fill()
+        this.ctx.beginPath()
+        this.ctx.fillStyle = coreGradient
+        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
+        this.ctx.fill()
 
-        // Draw ring with enhanced glow
-        ctx.beginPath()
-        ctx.ellipse(
+        this.ctx.beginPath()
+        this.ctx.ellipse(
           this.x,
           this.y,
           this.radius * 1.8,
@@ -336,11 +318,10 @@ export function BackgroundEffects() {
           0,
           Math.PI * 2
         )
-        ctx.strokeStyle = 'rgba(255, 0, 0, 0.4)'
-        ctx.lineWidth = 4
-        ctx.stroke()
+        this.ctx.strokeStyle = 'rgba(255, 0, 0, 0.4)'
+        this.ctx.lineWidth = 4
+        this.ctx.stroke()
 
-        // Draw multiple ring glows for enhanced effect
         const glowColors = [
           'rgba(255, 0, 0, 0.2)',
           'rgba(255, 50, 0, 0.15)',
@@ -348,8 +329,8 @@ export function BackgroundEffects() {
         ]
 
         glowColors.forEach((color, index) => {
-          ctx.beginPath()
-          ctx.ellipse(
+          this.ctx.beginPath()
+          this.ctx.ellipse(
             this.x,
             this.y,
             this.radius * (1.8 + index * 0.1),
@@ -358,9 +339,9 @@ export function BackgroundEffects() {
             0,
             Math.PI * 2
           )
-          ctx.strokeStyle = color
-          ctx.lineWidth = 8 + index * 4
-          ctx.stroke()
+          this.ctx.strokeStyle = color
+          this.ctx.lineWidth = 8 + index * 4
+          this.ctx.stroke()
         })
       }
     }
@@ -368,7 +349,7 @@ export function BackgroundEffects() {
     // Create objects
     const stars = Array(100).fill(null).map(() => new Star(canvas))
     const comets = Array(5).fill(null).map(() => new Comet(canvas))
-    const blackHole = new BlackHole()
+    const blackHole = new BlackHole(ctx)
     blackHoleRef.current = blackHole
 
     // Handle mouse/touch movement
@@ -392,19 +373,16 @@ export function BackgroundEffects() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Update and draw stars
       stars.forEach(star => {
         star.update()
-        star.draw()
+        star.draw(ctx)
       })
 
-      // Update and draw comets
       comets.forEach(comet => {
         comet.update()
-        comet.draw()
+        comet.draw(ctx)
       })
 
-      // Update and draw black hole
       blackHole.update()
       blackHole.draw()
 
