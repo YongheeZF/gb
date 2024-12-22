@@ -88,7 +88,9 @@ export default function Home() {
       
       <header className="relative z-10 pt-12">
         <h1 className="text-6xl font-bold mb-4 text-center">
-          <span className="text-red-500 text-shadow-red">Barry the Dread</span>
+          <span className="text-[#ff0000] text-shadow-red" style={{ 
+            textShadow: '0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5)'
+          }}>Barry the Dread</span>
         </h1>
         <h2 className="text-4xl font-bold text-center text-white mb-12 text-shadow-white">
           {currentPage ? currentPage.charAt(0).toUpperCase() + currentPage.slice(1) : "ยินดีต้อนรับท่านผู้มาเยือน"}
