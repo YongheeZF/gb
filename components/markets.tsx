@@ -10,9 +10,10 @@ interface MarketItemProps {
   imageType: string
   description: string
   link: string
+  exampleLink?: string // New optional property
 }
 
-function MarketItem({ title, image, imageType, description, link }: MarketItemProps) {
+function MarketItem({ title, image, imageType, description, link, exampleLink }: MarketItemProps) {
   return (
     <div className="bg-zinc-900 border-2 rounded-lg p-6 relative overflow-hidden" style={{ borderColor: '#FFD700' }}>
       <div className="absolute inset-0 z-0" style={{ boxShadow: 'inset 0 0 20px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.5)' }} />
@@ -28,7 +29,23 @@ function MarketItem({ title, image, imageType, description, link }: MarketItemPr
         </div>
         <h3 className="text-2xl font-bold mb-2" style={{ color: '#FFD700', textShadow: '0 0 10px rgba(255, 215, 0, 0.7)' }}>{title}</h3>
         <p className="text-gray-400 mb-4">{description}</p>
-        <div className="flex justify-end">
+        <div className="flex justify-end space-x-4"> {/* Added space between buttons */}
+          {exampleLink && ( // Render "Example" button only if exampleLink is provided
+            <Link href={exampleLink} target="_blank" rel="noopener noreferrer">
+              <Button 
+                variant="outline"
+                className="relative transition-all duration-300 border-2 animate-pulse-gold"
+                style={{ 
+                  borderColor: '#FFD700', 
+                  color: '#FFD700', 
+                  boxShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
+                  textShadow: '0 0 5px rgba(255, 215, 0, 0.5)'
+                }}
+              >
+                ตัวอย่าง
+              </Button>
+            </Link>
+          )}
           <Link href={link} target="_blank" rel="noopener noreferrer">
             <Button 
               variant="outline"
@@ -40,7 +57,7 @@ function MarketItem({ title, image, imageType, description, link }: MarketItemPr
                 textShadow: '0 0 5px rgba(255, 215, 0, 0.5)'
               }}
             >
-              ดูตัวอย่าง
+              ติดต่อสอบถาม
             </Button>
           </Link>
         </div>
@@ -51,31 +68,50 @@ function MarketItem({ title, image, imageType, description, link }: MarketItemPr
 
 export default function Markets() {
     const marketItems = [
+      {
+        title: "Amulets",
+        image: "/images/amulet",
+        imageType: "png",
+        description: "สวมเครื่องรางในช่องพิเศษโดยไม่พึ่งพาช่องของในตัว ลดภาระการใช้งานช่องโดยไม่จำเป็น แถมยังกำหนดบัฟต่างๆได้ตามใจชอบ",
+        link: "http://tiny.cc/AmethystCore",
+        exampleLink: "https://youtu.be/3P9lUP-L7ks?si=oEqnpp2n6JLK9CdT" 
+      },
         {
-          title: "กำลังลง.",
-          image: "/images/404",
+          title: "Floating Text & Leaderboard Pro Max",
+          image: "/images/leaderboard1",
           imageType: "png",
-          description: "กำลังลง...",
-          link: "http://tiny.cc/AmethystCore"
+          description: "อักษรลอยรองรับการพิมพ์ข้อความยาวๆหลายบรรทัด และ กระดานผู้นำที่กำหนดการแสดงผลได้สุดเฟี้ยว",
+          link: "http://tiny.cc/AmethystCore",
+          exampleLink: "https://youtu.be/nLuNIqkq97Q?si=RVqUz9fYc1_n3025" 
         },
         {
-          title: "กำลังลง..",
-          image: "/images/404",
+          title: "HP & DMG Indicator",
+          image: "/images/hpsystem",
           imageType: "png",
-          description: "กำลังลง...",
-          link: "http://tiny.cc/AmethystCore"
+          description: "แสดงจำนวนดาเมจ และ ฮีลเลือดอย่างสมบูรณ์แบบโดยไม่มีผลกระทบต่อม็อบกับสิ่งแวดล้อมในแมพใดๆ อีกทั้งแสดงเลือดปัจจุบัน/เลือดสูงสุดของสิ่งมีชีวิตที่กำหนดได้ ",
+          link: "http://tiny.cc/AmethystCore",
+          exampleLink: "https://youtu.be/tZCmop1KB9I?si=NgZWu1kpW9PdUg2y"
+          // No example link for this item
         },
         {
-          title: "กำลังลง...",
-          image: "/images/404",
+          title: "Private Safe House",
+          image: "/images/vault",
           imageType: "png",
-          description: "กำลังลง...",
+          description: "บ้าน หรือ ห้องเก็บของส่วนตัวใครๆก็ทำได้ใช่ไหมล่ะ แต่จะมีซักเท่าไหร่ที่จะไม่บัคและไม่โดนเกรียน?",
+          link: "http://tiny.cc/AmethystCore" 
+        },
+        {
+          title: "อื่นๆเพิ่มเติม",
+          image: "/images/more",
+          imageType: "gif",
+          description: "สามารถเข้าร่วมกลุ่ม Discord เข้ามาสอบถามเพิ่มเติมได้",
           link: "http://tiny.cc/AmethystCore"
+          // No example link for this item
         }
       ]
 
   return (
-    <div className="space-y-8 max-w-4xl mx-auto">
+    <div className="space-y-8 max-w-4xl mx-auto pb-20">
       {marketItems.map((item) => (
         <MarketItem 
           key={item.title}

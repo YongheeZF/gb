@@ -95,7 +95,7 @@ export default function Community() {
       ]
 
   return (
-    <div className="space-y-8 max-w-4xl mx-auto">
+    <div className="space-y-8 max-w-4xl mx-auto pb-20">
       {communityItems.map((item) => (
         <CommunityItem 
           key={item.title}

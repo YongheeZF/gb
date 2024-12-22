@@ -8,6 +8,7 @@ import PageSelection from '../components/page-selection'
 import { Button } from '@/components/ui/button'
 import { Volume2, VolumeX } from 'lucide-react'
 import Markets from '../components/markets'
+import CommandBlocks from '../components/command-blocks' // Added import
 
 const textShadowStyles = `
   .text-shadow-red {
@@ -69,6 +70,8 @@ export default function Home() {
         return <Markets />
       case 'communities':
         return <Community />
+      case 'command-blocks': // Added case
+        return <CommandBlocks /> // Added case
       default:
         return <PageSelection onSelectPage={handlePageSelection} />
     }
