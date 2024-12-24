@@ -369,12 +369,36 @@ export function BackgroundEffects() {
       blackHole.setTarget(x, y)
     }
 
-    window.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+    let lastTouchY = 0;
+    let touchStartY = 0;
+    let isTouchScrolling = false;
+
+    window.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+      lastTouchY = touchStartY;
+    }, { passive: true });
+
     window.addEventListener('touchmove', (e) => {
-      e.preventDefault()
-      const touch = e.touches[0]
-      handleMove(touch.clientX, touch.clientY)
+      const currentTouchY = e.touches[0].clientY;
+      const touchDeltaY = currentTouchY - lastTouchY;
+
+      if (!isTouchScrolling && Math.abs(currentTouchY - touchStartY) > 10) {
+        isTouchScrolling = true;
+      }
+
+      if (!isTouchScrolling) {
+        e.preventDefault();
+        handleMove(e.touches[0].clientX, currentTouchY);
+      }
+
+      lastTouchY = currentTouchY;
     }, { passive: false });
+
+    window.addEventListener('touchend', () => {
+      isTouchScrolling = false;
+    }, { passive: true });
+
+    window.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
 
     // Animation loop
     const animate = () => {
@@ -401,12 +425,29 @@ export function BackgroundEffects() {
     animate()
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas)
+      window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+      window.removeEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+        lastTouchY = touchStartY;
+      });
       window.removeEventListener('touchmove', (e) => {
-        e.preventDefault()
-        const touch = e.touches[0]
-        handleMove(touch.clientX, touch.clientY)
+        const currentTouchY = e.touches[0].clientY;
+        const touchDeltaY = currentTouchY - lastTouchY;
+
+        if (!isTouchScrolling && Math.abs(currentTouchY - touchStartY) > 10) {
+          isTouchScrolling = true;
+        }
+
+        if (!isTouchScrolling) {
+          e.preventDefault();
+          handleMove(e.touches[0].clientX, currentTouchY);
+        }
+
+        lastTouchY = currentTouchY;
+      });
+      window.removeEventListener('touchend', () => {
+        isTouchScrolling = false;
       });
     }
   }, [])
@@ -414,10 +455,11 @@ export function BackgroundEffects() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none"
+      className="fixed inset-0"
       style={{ 
         background: 'transparent',
         zIndex: 0,
+        pointerEvents: 'none',
       }}
     />
   )
