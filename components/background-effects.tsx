@@ -18,7 +18,6 @@ export function BackgroundEffects() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Set canvas size
     const resizeCanvas = () => {
       if (canvas) {
         canvas.width = window.innerWidth
@@ -28,7 +27,6 @@ export function BackgroundEffects() {
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
-    // ParticleSpark class for the flowing spark effects
     class ParticleSpark {
       x: number
       y: number
@@ -58,18 +56,14 @@ export function BackgroundEffects() {
         this.centerX = blackHoleX
         this.centerY = blackHoleY
         
-        // Spiral motion
         this.rotationAngle += 0.02
         this.rotationRadius -= 0.5
         
-        // Calculate new position
         this.x = this.centerX + Math.cos(this.rotationAngle) * this.rotationRadius
         this.y = this.centerY + Math.sin(this.rotationAngle) * this.rotationRadius
         
-        // Fade out as they get closer to center
         this.opacity = Math.max(0, this.rotationRadius / 100)
         
-        // Reset particle when it gets too close to center
         if (this.rotationRadius < 10) {
           this.reset()
         }
@@ -89,7 +83,6 @@ export function BackgroundEffects() {
       }
     }
 
-    // Star class
     class Star {
       x: number
       y: number
@@ -118,43 +111,42 @@ export function BackgroundEffects() {
       }
     }
 
-    // Comet class
     class Comet {
-      x: number;
-      y: number;
-      length: number;
-      speed: number;
-      angle: number;
-      opacity: number;
-      canvas: HTMLCanvasElement;
+      x: number
+      y: number
+      length: number
+      speed: number
+      angle: number
+      opacity: number
+      canvas: HTMLCanvasElement
 
       constructor(canvas: HTMLCanvasElement) {
-        this.canvas = canvas;
-        this.x = 0;
-        this.y = 0;
-        this.length = 0;
-        this.speed = 0;
-        this.angle = 0;
-        this.opacity = 1;
-        this.reset();
+        this.canvas = canvas
+        this.x = 0
+        this.y = 0
+        this.length = 0
+        this.speed = 0
+        this.angle = 0
+        this.opacity = 1
+        this.reset()
       }
 
       reset() {
-        this.x = Math.random() * this.canvas.width;
-        this.y = 0;
-        this.length = Math.random() * 80 + 20;
-        this.speed = Math.random() * 2 + 1;
-        this.angle = 70 + Math.random() * 20;
-        this.opacity = 1;
+        this.x = Math.random() * this.canvas.width
+        this.y = 0
+        this.length = Math.random() * 80 + 20
+        this.speed = Math.random() * 2 + 1
+        this.angle = 70 + Math.random() * 20
+        this.opacity = 1
       }
 
       update() {
-        const angleRad = (this.angle * Math.PI) / 180;
-        this.x += Math.cos(angleRad) * this.speed;
-        this.y += Math.sin(angleRad) * this.speed;
+        const angleRad = (this.angle * Math.PI) / 180
+        this.x += Math.cos(angleRad) * this.speed
+        this.y += Math.sin(angleRad) * this.speed
 
         if (this.y > this.canvas.height || this.x > this.canvas.width) {
-          this.reset();
+          this.reset()
         }
       }
 
@@ -181,7 +173,6 @@ export function BackgroundEffects() {
       }
     }
 
-    // Black Hole class
     class BlackHole {
       x: number
       y: number
@@ -196,7 +187,6 @@ export function BackgroundEffects() {
       flareBranches: Array<{angle: number, length: number, width: number}>
       sparks: ParticleSpark[]
       ctx: CanvasRenderingContext2D
-      followMouse: boolean;
 
       constructor(ctx: CanvasRenderingContext2D) {
         this.ctx = ctx
@@ -212,18 +202,15 @@ export function BackgroundEffects() {
         this.flareAngle = 0
         this.flareBranches = []
         this.sparks = Array(100).fill(null).map(() => new ParticleSpark(this.x, this.y))
-        this.followMouse = true;
       }
 
       update() {
         this.angle += this.rotationSpeed
 
-        if (this.followMouse) {
-          const dx = this.targetX - this.x;
-          const dy = this.targetY - this.y;
-          this.x += dx * 0.05; 
-          this.y += dy * 0.05;
-        }
+        const dx = this.targetX - this.x
+        const dy = this.targetY - this.y
+        this.x += dx * 0.05
+        this.y += dy * 0.05
 
         const currentTime = Date.now()
         if (currentTime - this.lastFlareTime > 30000) {
@@ -355,13 +342,11 @@ export function BackgroundEffects() {
       }
     }
 
-    // Create objects
     const stars = Array(100).fill(null).map(() => new Star(canvas))
     const comets = Array(5).fill(null).map(() => new Comet(canvas))
     const blackHole = new BlackHole(ctx)
     blackHoleRef.current = blackHole
 
-    // Handle mouse/touch movement
     const handleMove = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect()
       const x = clientX - rect.left
@@ -369,38 +354,43 @@ export function BackgroundEffects() {
       blackHole.setTarget(x, y)
     }
 
-    let lastTouchY = 0;
-    let touchStartY = 0;
-    let isTouchScrolling = false;
+    let startY = 0
+    let isDragging = false
+    let isScrolling = false
+    const scrollThreshold = 10
 
-    window.addEventListener('touchstart', (e) => {
-      touchStartY = e.touches[0].clientY;
-      lastTouchY = touchStartY;
-    }, { passive: true });
+    const handleTouchStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY
+      isDragging = true
+      isScrolling = false
+    }
 
-    window.addEventListener('touchmove', (e) => {
-      const currentTouchY = e.touches[0].clientY;
-      const touchDeltaY = currentTouchY - lastTouchY;
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging) return
 
-      if (!isTouchScrolling && Math.abs(currentTouchY - touchStartY) > 10) {
-        isTouchScrolling = true;
+      const currentY = e.touches[0].clientY
+      const deltaY = Math.abs(currentY - startY)
+
+      if (!isScrolling && deltaY > scrollThreshold) {
+        isScrolling = true
       }
 
-      if (!isTouchScrolling) {
-        e.preventDefault();
-        handleMove(e.touches[0].clientX, currentTouchY);
+      if (!isScrolling) {
+        e.preventDefault()
+        handleMove(e.touches[0].clientX, e.touches[0].clientY)
       }
+    }
 
-      lastTouchY = currentTouchY;
-    }, { passive: false });
+    const handleTouchEnd = () => {
+      isDragging = false
+      isScrolling = false
+    }
 
-    window.addEventListener('touchend', () => {
-      isTouchScrolling = false;
-    }, { passive: true });
+    window.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY))
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
+    window.addEventListener('touchmove', handleTouchMove, { passive: false })
+    window.addEventListener('touchend', handleTouchEnd, { passive: true })
 
-    window.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
-
-    // Animation loop
     const animate = () => {
       if (!ctx || !canvas) return
 
@@ -425,41 +415,21 @@ export function BackgroundEffects() {
     animate()
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
-      window.removeEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-        lastTouchY = touchStartY;
-      });
-      window.removeEventListener('touchmove', (e) => {
-        const currentTouchY = e.touches[0].clientY;
-        const touchDeltaY = currentTouchY - lastTouchY;
-
-        if (!isTouchScrolling && Math.abs(currentTouchY - touchStartY) > 10) {
-          isTouchScrolling = true;
-        }
-
-        if (!isTouchScrolling) {
-          e.preventDefault();
-          handleMove(e.touches[0].clientX, currentTouchY);
-        }
-
-        lastTouchY = currentTouchY;
-      });
-      window.removeEventListener('touchend', () => {
-        isTouchScrolling = false;
-      });
+      window.removeEventListener('resize', resizeCanvas)
+      window.removeEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY))
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchmove', handleTouchMove)
+      window.removeEventListener('touchend', handleTouchEnd)
     }
   }, [])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0"
+      className="fixed inset-0 pointer-events-none"
       style={{ 
         background: 'transparent',
-        zIndex: 0,
-        pointerEvents: 'none',
+        zIndex: 0
       }}
     />
   )
