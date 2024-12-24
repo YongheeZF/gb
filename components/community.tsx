@@ -41,7 +41,7 @@ function CommunityItem({ title, image, imageType, description, link, borderColor
                 textShadow: `0 0 5px ${borderColor}`
               }}
             >
-              Visit
+              เยี่ยมชม
             </Button>
           </Link>
         </div>
