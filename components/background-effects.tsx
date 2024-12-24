@@ -196,6 +196,7 @@ export function BackgroundEffects() {
       flareBranches: Array<{angle: number, length: number, width: number}>
       sparks: ParticleSpark[]
       ctx: CanvasRenderingContext2D
+      followMouse: boolean;
 
       constructor(ctx: CanvasRenderingContext2D) {
         this.ctx = ctx
@@ -211,15 +212,18 @@ export function BackgroundEffects() {
         this.flareAngle = 0
         this.flareBranches = []
         this.sparks = Array(100).fill(null).map(() => new ParticleSpark(this.x, this.y))
+        this.followMouse = true;
       }
 
       update() {
         this.angle += this.rotationSpeed
 
-        const dx = this.targetX - this.x
-        const dy = this.targetY - this.y
-        this.x += dx * 0.02
-        this.y += dy * 0.02
+        if (this.followMouse) {
+          const dx = this.targetX - this.x;
+          const dy = this.targetY - this.y;
+          this.x += dx * 0.05; 
+          this.y += dy * 0.05;
+        }
 
         const currentTime = Date.now()
         if (currentTime - this.lastFlareTime > 30000) {
@@ -365,12 +369,12 @@ export function BackgroundEffects() {
       blackHole.setTarget(x, y)
     }
 
-    canvas.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY))
-    canvas.addEventListener('touchmove', (e) => {
+    window.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+    window.addEventListener('touchmove', (e) => {
       e.preventDefault()
       const touch = e.touches[0]
       handleMove(touch.clientX, touch.clientY)
-    })
+    }, { passive: false });
 
     // Animation loop
     const animate = () => {
@@ -398,25 +402,22 @@ export function BackgroundEffects() {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas)
-      if (canvas) {
-        canvas.removeEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY))
-        canvas.removeEventListener('touchmove', (e) => {
-          e.preventDefault()
-          const touch = e.touches[0]
-          handleMove(touch.clientX, touch.clientY)
-        })
-      }
+      window.removeEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+      window.removeEventListener('touchmove', (e) => {
+        e.preventDefault()
+        const touch = e.touches[0]
+        handleMove(touch.clientX, touch.clientY)
+      });
     }
   }, [])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0"
+      className="fixed inset-0 pointer-events-none"
       style={{ 
         background: 'transparent',
         zIndex: 0,
-        touchAction: 'none'
       }}
     />
   )
