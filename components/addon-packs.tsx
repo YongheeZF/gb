@@ -186,7 +186,7 @@ export default function AddonPacks() {
       title: "Lobby System [1.21.51]",
       image: "/images/lobbysystem1",
       imageType: "png",
-      description: "ยกระดับระบบป้องกันการใช้งานบล็อกต่างๆที่กำหนดด้วยแท็กพิเศษ ปกป้องไม่ให้คนสร้างความวินาศแก่สิ่งปลูกสร้างที่ท่านรักจงลองใช้แอดออนนี้!",
+      description: "[Beta API] ยกระดับระบบป้องกันการใช้งานบล็อกต่างๆที่กำหนดด้วยแท็กพิเศษ ปกป้องไม่ให้คนสร้างความวินาศแก่สิ่งปลูกสร้างที่ท่านรักจงลองใช้แอดออนนี้!",
       filePath: "/packs/LobbySystem.mcpack",
       instructionsLink: "https://youtu.be/MmuX-NY3x5E?si=mugOrWTaBNjMKl5n"
     },
@@ -197,6 +197,14 @@ export default function AddonPacks() {
       description: "สวมใส่เกราะและได้รับอุปกรณ์เข้าตัว พร้อมชื่อ, เอนชานต์, และ lore ที่กำหนดได้แบบสุดเท่ที่ ลองเลย!",
       filePath: "/packs/BarryTemplate.mcpack",
       instructionsLink: "https://youtu.be/4s_4QWhBBIM?si=_8aawmMIV-MEjkkn"
+    },
+    {
+      title: "Join & Leave Notification [1.21.51]",
+      image: "/images/join_leave1",
+      imageType: "png",
+      description: "[Beta API] ระบบแจ้งเตือนในแชท ระบุเวลาเมื่อมีผู้เข้า & ออกแมพด้วยเวลาจริงของเขตเวลาประเทศไทย",
+      filePath: "/packs/BarryNotification_1.mcpack",
+      instructionsLink: "https://youtu.be/StsQPQ9Pp4g"
     }
   ]
 
