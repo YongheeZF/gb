@@ -178,7 +178,7 @@ export default function AddonPacks() {
       title: "Invincible Dummy [1.21+]",
       image: "/images/kill_ae",
       imageType: "png",
-      description: "หุ่นโชว์เกราะ & ผู้เล่นปลอมล่องหน ทนทาน kill @e อย่างมาก",
+      description: "[No Beta API] หุ่นโชว์เกราะ & ผู้เล่นปลอมล่องหน ทนทาน kill @e อย่างมาก",
       filePath: "/packs/superdummy.mcpack",
       instructionsLink: "https://youtu.be/bMv2HPAFL5k?si=1sOZR0e4_OuMbEGE"
     },
@@ -194,7 +194,7 @@ export default function AddonPacks() {
       title: "Barry's Ultimate Template [1.21.51]",
       image: "/images/armorsystem1",
       imageType: "png",
-      description: "สวมใส่เกราะและได้รับอุปกรณ์เข้าตัว พร้อมชื่อ, เอนชานต์, และ lore ที่กำหนดได้แบบสุดเท่ที่ ลองเลย!",
+      description: "[No Beta API] สวมใส่เกราะและได้รับอุปกรณ์เข้าตัว พร้อมชื่อ, เอนชานต์, และ lore ที่กำหนดได้แบบสุดเท่ที่ ลองเลย!",
       filePath: "/packs/BarryTemplate.mcpack",
       instructionsLink: "https://youtu.be/4s_4QWhBBIM?si=_8aawmMIV-MEjkkn"
     },
