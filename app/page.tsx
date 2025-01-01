@@ -83,7 +83,7 @@ export default function Home() {
       <BackgroundEffects />
       <audio 
         ref={audioRef} 
-        src="/audio/a.mp3"
+        src="/audio/c.mp3"
       />
       
       <header className="relative z-10 pt-12">
