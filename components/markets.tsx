@@ -15,9 +15,9 @@ interface MarketItemProps {
 
 function MarketItem({ title, image, imageType, description, link, exampleLink }: MarketItemProps) {
   return (
-    <div className="bg-zinc-900 border-2 rounded-lg p-6 relative overflow-hidden" style={{ borderColor: '#FFD700' }}>
+    <div className="bg-zinc-900 border-2 rounded-lg p-6 relative overflow-hidden h-full" style={{ borderColor: '#FFD700' }}>
       <div className="absolute inset-0 z-0" style={{ boxShadow: 'inset 0 0 20px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.5)' }} />
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         <div className="aspect-video relative mb-4 bg-zinc-800 rounded-lg overflow-hidden">
           <Image 
             src={`${image}.${imageType}`}
@@ -28,8 +28,8 @@ function MarketItem({ title, image, imageType, description, link, exampleLink }:
           />
         </div>
         <h3 className="text-2xl font-bold mb-2" style={{ color: '#FFD700', textShadow: '0 0 10px rgba(255, 215, 0, 0.7)' }}>{title}</h3>
-        <p className="text-gray-400 mb-4">{description}</p>
-        <div className="flex justify-end space-x-4"> {/* Added space between buttons */}
+        <p className="text-gray-400 mb-4 flex-1">{description}</p>
+        <div className="flex justify-end space-x-4 mt-auto"> {/* Added space between buttons */}
           {exampleLink && ( // Render "Example" button only if exampleLink is provided
             <Link href={exampleLink} target="_blank" rel="noopener noreferrer">
               <Button 
@@ -111,7 +111,7 @@ export default function Markets() {
       ]
 
   return (
-    <div className="space-y-8 max-w-4xl mx-auto pb-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto pb-20">
       {marketItems.map((item) => (
         <MarketItem 
           key={item.title}

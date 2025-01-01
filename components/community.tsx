@@ -15,9 +15,9 @@ interface CommunityItemProps {
 
 function CommunityItem({ title, image, imageType, description, link, borderColor }: CommunityItemProps) {
   return (
-    <div className={`bg-zinc-900 border-2 rounded-lg p-6 relative overflow-hidden`} style={{ borderColor }}>
+    <div className={`bg-zinc-900 border-2 rounded-lg p-6 relative overflow-hidden h-full`} style={{ borderColor }}>
       <div className="absolute inset-0 z-0" style={{ boxShadow: `inset 0 0 20px ${borderColor}` }} />
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         <div className="aspect-video relative mb-4 bg-zinc-800 rounded-lg overflow-hidden">
           <Image 
             src={`${image}.${imageType}`}
@@ -28,8 +28,8 @@ function CommunityItem({ title, image, imageType, description, link, borderColor
           />
         </div>
         <h3 className="text-2xl font-bold mb-2 text-shadow-custom" style={{ color: borderColor, textShadow: `0 0 10px ${borderColor}` }}>{title}</h3>
-        <p className="text-gray-400 mb-4">{description}</p>
-        <div className="flex justify-end">
+        <p className="text-gray-400 mb-4 flex-1">{description}</p>
+        <div className="flex justify-end mt-auto">
           <Link href={link} target="_blank" rel="noopener noreferrer">
             <Button 
               variant="outline"
@@ -95,7 +95,7 @@ export default function Community() {
       ]
 
   return (
-    <div className="space-y-8 max-w-4xl mx-auto pb-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto pb-20">
       {communityItems.map((item) => (
         <CommunityItem 
           key={item.title}

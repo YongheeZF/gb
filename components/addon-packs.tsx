@@ -36,8 +36,8 @@ function AddonPack({ title, image, imageType, description, filePath, instruction
 
     try {
       const response = await fetch(filePath)
-      if (!response.ok) throw new Error('Download failed')
-      
+      if (!response.ok) throw new Error('ดาวน์โหลดล้มเหลว')
+
       const blob = await response.blob()
       const url = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
@@ -56,7 +56,7 @@ function AddonPack({ title, image, imageType, description, filePath, instruction
       }
     } catch (error) {
       console.error('Download failed:', error)
-      alert('Sorry, the download failed. Please try again later.')
+      alert('ขอประทานโทษที่ดาวน์โหลดไม่สำเร็จ โปรดลองอีกครั้ง')
     } finally {
       setIsDownloading(false)
       setTimeout(() => {
@@ -66,11 +66,11 @@ function AddonPack({ title, image, imageType, description, filePath, instruction
   }
 
   return (
-    <div className="bg-zinc-900 border-2 border-red-500/20 rounded-lg p-6 relative overflow-hidden">
+    <div className="bg-zinc-900 border-2 border-[#FF0000] rounded-lg p-6 relative overflow-hidden">
       <div className="absolute inset-0 z-0" style={{ boxShadow: 'inset 0 0 20px rgb(255, 0, 0), 0 0 20px rgb(255, 0, 0)' }} />
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         <div className="aspect-video relative mb-4 bg-zinc-800 rounded-lg overflow-hidden">
-          <Image 
+          <Image
             src={`${image}.${imageType}`}
             alt={title}
             fill
@@ -78,15 +78,15 @@ function AddonPack({ title, image, imageType, description, filePath, instruction
             priority
           />
         </div>
-        <h3 className="text-2xl font-bold text-red-500 mb-2 text-shadow-red">{title}</h3>
-        <div className="flex items-center justify-between">
-          <p className="text-gray-400">{description}</p>
-          <div className="flex items-center gap-2">
+        <h3 className="text-2xl font-bold text-red-500 mb-2" style={{ textShadow: '0 0 10px rgba(255, 0, 0, 0.7)' }}>{title}</h3>
+        <div className="flex flex-col flex-1">
+          <p className="text-gray-300 mb-4">{description}</p>
+          <div className="flex items-center gap-2 justify-end mt-auto">
             <Link href={instructionsLink} target="_blank" rel="noopener noreferrer">
-              <Button 
+              <Button
                 variant="outline"
                 className="relative transition-all duration-300 border-2 border-yellow-500 text-yellow-500 animate-pulse-yellow"
-                style={{ 
+                style={{
                   boxShadow: '0 0 10px rgb(234, 179, 8)',
                   textShadow: '0 0 5px rgb(234, 179, 8)'
                 }}
@@ -97,13 +97,15 @@ function AddonPack({ title, image, imageType, description, filePath, instruction
             </Link>
             <div className="relative">
               <div className={`absolute -inset-1 ${hasDownloaded ? 'bg-green-500/30' : 'bg-red-600/30'} rounded-lg blur-sm`} />
-              <Button 
+              <Button
                 variant={hasDownloaded ? "outline" : "default"}
                 onClick={handleDownload}
                 disabled={cooldown || isDownloading}
-                className={`relative transition-all duration-300 border-2 ${
-                  hasDownloaded ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500'
-                } animate-pulse-glow`}
+                className={`relative transition-all duration-300 border-2 ${hasDownloaded ? 'border-[#00FF00] text-[#00FF00]' : 'border-[#FF0000] text-[#FF0000]'} animate-pulse-glow`}
+                style={{
+                  boxShadow: hasDownloaded ? '0 0 10px rgb(0, 255, 0)' : '0 0 10px rgb(255, 0, 0)',
+                  textShadow: hasDownloaded ? '0 0 5px rgb(0, 255, 0)' : '0 0 5px rgb(255, 0, 0)'
+                }}
               >
                 <span className={`${isDownloading ? 'opacity-0' : 'opacity-100'} flex items-center gap-2`}>
                   {hasDownloaded ? (
@@ -111,27 +113,27 @@ function AddonPack({ title, image, imageType, description, filePath, instruction
                       <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12"></polyline>
                       </svg>
-                      Downloaded
+                      ดาวน์โหลดไปแย้ว
                     </>
                   ) : (
-                    'Download'
+                    'ดาวน์โหลด'
                   )}
                 </span>
                 {isDownloading && (
                   <span className="absolute inset-0 flex items-center justify-center">
                     <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                      <circle 
-                        className="opacity-25" 
-                        cx="12" 
-                        cy="12" 
-                        r="10" 
-                        stroke="currentColor" 
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
                         strokeWidth="4"
                         fill="none"
                       />
-                      <path 
-                        className="opacity-75" 
-                        fill="currentColor" 
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       />
                     </svg>
@@ -140,7 +142,7 @@ function AddonPack({ title, image, imageType, description, filePath, instruction
               </Button>
               {cooldown && (
                 <div className="absolute -bottom-6 left-0 right-0 text-center text-sm text-gray-500">
-                  Please wait...
+                  รอสักครู่นะ...
                 </div>
               )}
             </div>
@@ -209,9 +211,9 @@ export default function AddonPacks() {
   ]
 
   return (
-    <div className="space-y-8 max-w-4xl mx-auto pb-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto pb-20">
       {packs.map((pack) => (
-        <AddonPack 
+        <AddonPack
           key={pack.title}
           {...pack}
           onDownload={handleDownload}
@@ -221,11 +223,11 @@ export default function AddonPacks() {
         @keyframes pulse-glow {
           0%, 100% {
             opacity: 1;
-            box-shadow: 0 0 10px currentColor;
+            box-shadow: 0 0 15px currentColor;
           }
           50% {
             opacity: 0.8;
-            box-shadow: 0 0 20px currentColor;
+            box-shadow: 0 0 25px currentColor;
           }
         }
         .animate-pulse-glow {
@@ -234,11 +236,11 @@ export default function AddonPacks() {
         @keyframes pulse-yellow {
           0%, 100% {
             opacity: 1;
-            box-shadow: 0 0 10px rgb(234, 179, 8);
+            box-shadow: 0 0 15px rgb(234, 179, 8);
           }
           50% {
             opacity: 0.8;
-            box-shadow: 0 0 20px rgb(234, 179, 8);
+            box-shadow: 0 0 25px rgb(234, 179, 8);
           }
         }
         .animate-pulse-yellow {
