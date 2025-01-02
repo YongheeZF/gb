@@ -1,8 +1,21 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export function BackgroundEffects() {
+  const [showGif, setShowGif] = useState(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowGif(true)
+      setTimeout(() => {
+        setShowGif(false)
+      }, 4000) // Show GIF for 4 seconds
+    }, 15000) // Trigger every 15 seconds
+
+    return () => clearInterval(interval)
+  }, [])
+
   const canvasRef = useRef<HTMLCanvasElement>(null)
   type BlackHoleType = {
     update: () => void;
@@ -424,14 +437,27 @@ export function BackgroundEffects() {
   }, [])
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none"
-      style={{ 
-        background: 'transparent',
-        zIndex: 0
-      }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none"
+        style={{ 
+          background: 'transparent',
+          zIndex: 0
+        }}
+      />
+      <div 
+        className={`fixed inset-0 transition-opacity duration-1000 pointer-events-none ${
+          showGif ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{
+          zIndex: 1,
+          backgroundImage: 'url(/images/background.gif)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      />
+    </>
   )
 }
 
