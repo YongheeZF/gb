@@ -91,7 +91,6 @@ export default function Markets() {
           description: "แสดงจำนวนดาเมจ และ ฮีลเลือดอย่างสมบูรณ์แบบโดยไม่มีผลกระทบต่อม็อบกับสิ่งแวดล้อมในแมพใดๆ อีกทั้งแสดงเลือดปัจจุบัน/เลือดสูงสุดของสิ่งมีชีวิตที่กำหนดได้ ",
           link: "http://tiny.cc/AmethystCore",
           exampleLink: "https://youtu.be/tZCmop1KB9I?si=NgZWu1kpW9PdUg2y"
-          // No example link for this item
         },
         {
           title: "Private Safe House",
@@ -99,14 +98,6 @@ export default function Markets() {
           imageType: "png",
           description: "บ้าน หรือ ห้องเก็บของส่วนตัวใครๆก็ทำได้ใช่ไหมล่ะ แต่จะมีซักเท่าไหร่ที่จะไม่บัคและไม่โดนเกรียน?",
           link: "http://tiny.cc/AmethystCore" 
-        },
-        {
-          title: "อื่นๆเพิ่มเติม",
-          image: "/images/more",
-          imageType: "gif",
-          description: "สามารถเข้าร่วมกลุ่ม Discord เข้ามาสอบถามเพิ่มเติมได้",
-          link: "http://tiny.cc/AmethystCore"
-          // No example link for this item
         }
       ]
 

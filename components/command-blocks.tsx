@@ -83,14 +83,6 @@ export default function CommandBlocks() {
         description: "แกล้งเพื่อนด้วยหมัดติดไฟ แต่จริงๆแล้วดาบซ่อนอยู่",
         link: "https://youtu.be/kKiUdA4s7YU?si=rdurjNjg0saPfq7d",
         borderColor: "#9C27B0" 
-      },
-      {
-        title: "ผลงานอื่นๆเพิ่มเติม",
-        image: "/images/more2",
-        imageType: "gif",
-        description: "รับชมได้ผ่านช่องทาง YouTube",
-        link: "https://www.youtube.com/@barryaroy/videos",
-        borderColor: "#FFFF00" 
       }
     ]
 
