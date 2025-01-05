@@ -177,6 +177,14 @@ export default function AddonPacks() {
 
   const packs = [
     {
+      title: "วาร์ปส่วนตัว & สาธารณะ [1.21.51]",
+      image: "/images/red-location-pin",
+      imageType: "png",
+      description: "[Beta API] *ไม่ใช้รีซอร์สแพ็ค, ตั้งจุดวาร์ปส่วนตัวและส่วนรวมเพื่อความสะดวกในการเล่นเอาชีวิตรอดกับเพื่อนๆ มีช่องค้นหาเพื่อความง่ายดายต่อการใช้และจำกัดจำนวนการตั้งจุดวาร์ปส่วนตัวได้!",
+      filePath: "/packs/WarpSystem.mcpack",
+      instructionsLink: "https://youtu.be/hCEufc94QQ8"
+    },
+    {
       title: "Invincible Dummy [1.21+]",
       image: "/images/kill_ae",
       imageType: "png",
