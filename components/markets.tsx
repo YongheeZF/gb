@@ -77,8 +77,8 @@ export default function Markets() {
         exampleLink: "https://youtu.be/3P9lUP-L7ks?si=oEqnpp2n6JLK9CdT" 
       },
         {
-          title: "Floating Text & Leaderboard Pro Max",
-          image: "/images/leaderboard1",
+          title: "Floating Text & Leaderboard Pro Max (No Resource Pack)",
+          image: "/images/leaderboard1_2",
           imageType: "png",
           description: "อักษรลอยรองรับการพิมพ์ข้อความยาวๆหลายบรรทัด และ กระดานผู้นำที่กำหนดการแสดงผลได้สุดเฟี้ยว",
           link: "http://tiny.cc/AmethystCore",
@@ -94,7 +94,7 @@ export default function Markets() {
         },
         {
           title: "Private Safe House",
-          image: "/images/vault",
+          image: "/images/vault1_2",
           imageType: "png",
           description: "บ้าน หรือ ห้องเก็บของส่วนตัวใครๆก็ทำได้ใช่ไหมล่ะ แต่จะมีซักเท่าไหร่ที่จะไม่บัคและไม่โดนเกรียน?",
           link: "http://tiny.cc/AmethystCore" 
