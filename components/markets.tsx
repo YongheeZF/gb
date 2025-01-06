@@ -78,7 +78,7 @@ export default function Markets() {
       },
         {
           title: "Floating Text & Leaderboard Pro Max (No Resource Pack)",
-          image: "/images/leaderboard1_3",
+          image: "/images/leaderboard1_4",
           imageType: "png",
           description: "อักษรลอยรองรับการพิมพ์ข้อความยาวๆหลายบรรทัด และ กระดานผู้นำที่กำหนดการแสดงผลได้สุดเฟี้ยว",
           link: "http://tiny.cc/AmethystCore",
