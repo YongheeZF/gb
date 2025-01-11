@@ -185,7 +185,7 @@ export default function AddonPacks() {
       instructionsLink: "https://youtu.be/hCEufc94QQ8"
     },
     {
-      title: "Invincible Dummy [1.21+]",
+      title: "Invincible Dummy [1.14-1.21+]",
       image: "/images/kill_ae",
       imageType: "png",
       description: "[No Beta API] หุ่นโชว์เกราะ & ผู้เล่นปลอมล่องหน ทนทาน kill @e อย่างมาก",
@@ -193,7 +193,7 @@ export default function AddonPacks() {
       instructionsLink: "https://youtu.be/bMv2HPAFL5k?si=1sOZR0e4_OuMbEGE"
     },
     {
-      title: "ม็อบต่างๆฆ่าไม่ตาย",
+      title: "ม็อบต่างๆฆ่าไม่ตาย [1.14-1.21+]",
       image: "/images/kill_ae2",
       imageType: "png",
       description: "[JSON] อมตะที่ฆ่าไม่ตายนอกจากทำให้ despawn หรือ วาร์ปไปทิ้งไกลๆ ``ของเล่นยุคเก่าที่ยังใช้ได้ผล``",
