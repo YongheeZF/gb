@@ -193,6 +193,14 @@ export default function AddonPacks() {
       instructionsLink: "https://youtu.be/bMv2HPAFL5k?si=1sOZR0e4_OuMbEGE"
     },
     {
+      title: "ม็อบต่างๆฆ่าไม่ตาย",
+      image: "/images/kill_ae2",
+      imageType: "png",
+      description: "[JSON] อมตะที่ฆ่าไม่ตายนอกจากทำให้ despawn หรือ วาร์ปไปทิ้งไกลๆ ``ของเล่นยุคเก่าที่ยังใช้ได้ผล``",
+      filePath: "/packs/ultimate_pig_example.mcpack",
+      instructionsLink: "https://youtu.be/J81KT4kOpfg"
+    },
+    {
       title: "Lobby System [1.21.51]",
       image: "/images/lobbysystem1",
       imageType: "png",
