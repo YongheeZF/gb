@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "BarryAroy",
-  description: "Upon my name as Godbarry",
+  description: "Upon my name as Godbarry the Dread",
 };
 
 export default function RootLayout({
