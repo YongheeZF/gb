@@ -184,7 +184,7 @@ export default function AddonPacks() {
 
   const packs = [
     {
-      title: "รูปลักษณ์โคตรคมชัด [1.21.51]",
+      title: "รูปลักษณ์โคตรคมชัด [1.21.60]",
       image: "/images/frenzied_types",
       imageType: "png",
       description: "[No Beta API] เปลี่ยนรูปลักษณ์ให้คมชัดขึ้นแบบกำหนดได้ให้กับทุกคน เหมาะสำหรับแมพแนวสวมบทบาทและบ้าพลังกราฟฟิก",
@@ -192,21 +192,13 @@ export default function AddonPacks() {
       instructionsLink: "https://youtu.be/Jmy582sTpuo",
     },
     {
-      title: "วาร์ปส่วนตัว & สาธารณะ [1.21.51]",
+      title: "วาร์ปส่วนตัว & สาธารณะ [1.21.60]",
       image: "/images/red-location-pin",
       imageType: "png",
       description:
         "[Beta API] *ไม่ใช้รีซอร์สแพ็ค, ตั้งจุดวาร์ปส่วนตัวและส่วนรวมเพื่อความสะดวกในการเล่นเอาชีวิตรอดกับเพื่อนๆ มีช่องค้นหาเพื่อความง่ายดายต่อการใช้และจำกัดจำนวนการตั้งจุดวาร์ปส่วนตัวได้!",
       filePath: "/packs/WarpSystem.mcpack",
       instructionsLink: "https://youtu.be/hCEufc94QQ8",
-    },
-    {
-      title: "Invincible Dummy [1.14-1.21+]",
-      image: "/images/kill_ae",
-      imageType: "png",
-      description: "[No Beta API] หุ่นโชว์เกราะ & ผู้เล่นปลอมล่องหน ทนทาน kill @e อย่างมาก",
-      filePath: "/packs/superdummy.mcpack",
-      instructionsLink: "https://youtu.be/bMv2HPAFL5k?si=1sOZR0e4_OuMbEGE",
     },
     {
       title: "ม็อบต่างๆฆ่าไม่ตาย [1.14-1.21+]",
@@ -217,7 +209,15 @@ export default function AddonPacks() {
       instructionsLink: "https://youtu.be/J81KT4kOpfg",
     },
     {
-      title: "Lobby System [1.21.51]",
+      title: "Invincible Dummy [1.14-1.21+]",
+      image: "/images/kill_ae",
+      imageType: "png",
+      description: "[No Beta API] หุ่นโชว์เกราะ & ผู้เล่นปลอมล่องหน ทนทาน kill @e อย่างมาก",
+      filePath: "/packs/superdummy.mcpack",
+      instructionsLink: "https://youtu.be/bMv2HPAFL5k?si=1sOZR0e4_OuMbEGE",
+    },
+    {
+      title: "Lobby System [1.21.60]",
       image: "/images/lobbysystem1",
       imageType: "png",
       description:
@@ -226,7 +226,7 @@ export default function AddonPacks() {
       instructionsLink: "https://youtu.be/MmuX-NY3x5E?si=mugOrWTaBNjMKl5n",
     },
     {
-      title: "Barry's Ultimate Template [1.21.51]",
+      title: "Barry's Ultimate Template [1.21.60]",
       image: "/images/armorsystem1",
       imageType: "png",
       description: "[No Beta API] สวมใส่เกราะและได้รับอุปกรณ์เข้าตัว พร้อมชื่อ, เอนชานต์, และ lore ที่กำหนดได้แบบสุดเท่ที่ ลองเลย!",
@@ -234,7 +234,7 @@ export default function AddonPacks() {
       instructionsLink: "https://youtu.be/4s_4QWhBBIM?si=_8aawmMIV-MEjkkn",
     },
     {
-      title: "Join & Leave Notification [1.21.51]",
+      title: "Join & Leave Notification [1.21.60]",
       image: "/images/join_leave1",
       imageType: "png",
       description: "[Beta API] ระบบแจ้งเตือนในแชท ระบุเวลาเมื่อมีผู้เข้า & ออกแมพด้วยเวลาจริงของเขตเวลาประเทศไทย",
