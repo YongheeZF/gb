@@ -53,7 +53,7 @@ function CommandBlockItem({ title, image, imageType, description, link, borderCo
 export default function CommandBlocks() {
     const commandBlockItems = [
       {
-        title: "Auto TNT (1.21.51)",
+        title: "Auto TNT (1.21.60)",
         image: "/images/auto_tnt",
         imageType: "png",
         description: "ระบบจุด TNT อัตโนมัติเมื่อวาง",
@@ -61,7 +61,7 @@ export default function CommandBlocks() {
         borderColor: "#FF0000"  
       },
       {
-        title: "Particle นำทาง (1.21.51)",
+        title: "Particle นำทาง (1.21.60)",
         image: "/images/particle_waypoint",
         imageType: "png",
         description: "ระบบ Particle ชี้ทางไปหาเป้าหมายที่กำหนด หรือ พิกัดที่กำหนด",
@@ -69,7 +69,7 @@ export default function CommandBlocks() {
         borderColor: "#2196F3"  
       },
       {
-        title: "ล็อคขา และ หัว (1.21.51)",
+        title: "ล็อคขา และ หัว (1.21.60)",
         image: "/images/lock_system",
         imageType: "png",
         description: "ระบบล็อคการหันจอ, เดิน, วิ่ง, กระโดด, ย่อตัว, และ ว่ายน้ำ ของคนที่กำหนด",
